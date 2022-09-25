@@ -12,7 +12,7 @@ public class PracticeFormTests {
     public static void congigUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1280";
-        //Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = true;
     }
 
     @Test
@@ -31,6 +31,8 @@ public class PracticeFormTests {
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#hobbiesWrapper").$(byText("Music")).click();
+        $("#uploadPicture").uploadFromClasspath("pic.jpg");
+        $("#currentAddress").setValue("test, test, 333, test");
         $("#stateCity-wrapper").click();
         $(byText("Haryana")).click();
         $("#city").click();
@@ -38,13 +40,16 @@ public class PracticeFormTests {
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Nikita Demin"),
+        $(".table-responsive")
+                .shouldHave(text("Nikita Demin"),
                 text("test@test.ru"),
                 text("Male"),
                 text("9066293356"),
                 text("31 May,1991"),
                 text("Computer Science"),
                 text("Sports, Reading, Music"),
+                text("test, test, 333, test"),
+                text("pic.jpg"),
                 text("Haryana Karnal"));
     }
 }
